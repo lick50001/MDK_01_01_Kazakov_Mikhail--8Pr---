@@ -10,6 +10,10 @@ namespace Shop_Kazakov.Classes
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public Shop(string Name, int Price) { }
+        public Shop(string Name, int Price)
+        {
+            this.Name = Name;
+            this.Price = Price;
+        }
     }
 }
