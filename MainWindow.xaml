@@ -7,9 +7,23 @@
         mc:Ignorable="d"
         Title="Shop" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Visible"  VerticalScrollBarVisibility="Hidden">
-            <StackPanel x:Name="parent" Orientation="Horizontal">
-            </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <StackPanel x:Name="parent" Orientation="Horizontal" />
         </ScrollViewer>
+
+        <TextBox x:Name="SerchTextBox"
+         Height="36"
+         Width="126"
+         HorizontalAlignment="Left"
+         VerticalAlignment="Top"
+         Margin="10" />
+
+        <Button Click="Search"
+        Content="Найти"
+        Height="36"
+        Width="80"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="140,10,0,0" />
     </Grid>
 </Window>

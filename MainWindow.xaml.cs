@@ -34,5 +34,18 @@ namespace Shop_Kazakov
             foreach (var item in AllItems)
                 parent.Children.Add(new Elements.Item(item));
         }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            string ItemSearch = SerchTextBox.Text.Trim();
+            parent.Children.Clear();
+            foreach (var item in AllItems)
+            {
+                var shopItem = item as Classes.Shop;
+                if (shopItem.Name.IndexOf(ItemSearch, StringComparison.OrdinalIgnoreCase) >= 0)
+                    parent.Children.Add(new Elements.Item(item));
+            }
+
+        }
     }
 }

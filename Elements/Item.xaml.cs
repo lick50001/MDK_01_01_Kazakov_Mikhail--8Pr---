@@ -42,6 +42,12 @@ namespace Shop_Kazakov.Elements
 
                 tb_Characteristic.Content = "Размер: " + SportData.Size; 
             }
+
+            if (ItemData is Classes.Electronik)
+            {
+                Classes.Electronik ElectronikData = ItemData as Classes.Electronik;
+                tb_Characteristic.Content = "Емкость Аккамулятора: " + ElectronikData.BatteryCapacity + "\n\nМаксмальная скорость: " + ElectronikData.MaxSpeed;
+            }
         }
     }
 }

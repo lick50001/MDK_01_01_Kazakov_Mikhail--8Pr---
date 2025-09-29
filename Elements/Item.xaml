@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Shop_Kazakov.Elements"
              mc:Ignorable="d">
     <Grid>
-        <Border Margin="20" Width="200" CornerRadius="20" Background="#FF5a5a5a">
+        <Border Margin="20"  Width="200" CornerRadius="20" Background="#FF5a5a5a">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
