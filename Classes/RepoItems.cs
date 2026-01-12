@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop_Kazakov.Classes
+namespace Shop_Kazakov.Models
 {
     public class RepoItems
     {

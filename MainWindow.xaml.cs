@@ -20,7 +20,7 @@ namespace Shop_Kazakov
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<object> AllItems = Classes.RepoItems.AllItems();
+        List<object> AllItems = Models.RepoItems.AllItems();
 
         public MainWindow()
         {
@@ -41,7 +41,7 @@ namespace Shop_Kazakov
             parent.Children.Clear();
             foreach (var item in AllItems)
             {
-                var shopItem = item as Classes.Shop;
+                var shopItem = item as Models.Shop;
                 if (shopItem.Name.IndexOf(ItemSearch, StringComparison.OrdinalIgnoreCase) >= 0)
                     parent.Children.Add(new Elements.Item(item));
             }
