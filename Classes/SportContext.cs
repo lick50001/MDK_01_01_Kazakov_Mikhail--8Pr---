@@ -6,12 +6,12 @@ using Shop_Kazakov.Models;
 
 namespace Shop_Kazakov.Classes
 {
-    public class ChildrenContext : Children, IContext
+    public class SportContext : Sport, IContext
     {
 
 
-        public ChildrenContext(int Id, string Name, int Price, int Age, int IdShop)
-            : base(Id, Name, Price, Age, IdShop) { }
+        public SportContext(int Id, string Name, int Price, string Size)
+            : base(Id, Name, Price, Size) { }
 
         public List<object> All()
         {
@@ -20,17 +20,18 @@ namespace Shop_Kazakov.Classes
 
         public static List<object> GetAllItems()
         {
-            var allChildren = new List<object>();
+            var allSport = new List<object>();
 
             try
             {
                 using (var conn = Common.DBConnection.Conn())
                 {
-
+                    // Таблица "Спортивный инвентарь" с полями:
+                    // Код, Код товара, Размер
                     var cmd = new OleDbCommand(@"
-                    SELECT d.[Код], t.[Наименование], t.[Стоимость], d.[Возраст], d.[Код товара]
-                    FROM [Детские вещи] d
-                    INNER JOIN [Товар] t ON d.[Код товара] = t.[Код]", conn);
+                    SELECT s.[Код], t.[Наименование], t.[Стоимость], s.[Размер]
+                    FROM [Спортивный инвентарь] s
+                    INNER JOIN [Товар] t ON s.[Код товара] = t.[Код]", conn);
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -38,14 +39,12 @@ namespace Shop_Kazakov.Classes
                         {
                             try
                             {
-
                                 int id = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
                                 string name = reader.IsDBNull(1) ? "Без названия" : reader.GetString(1);
                                 int price = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
-                                int age = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
-                                int idShop = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
+                                string size = reader.IsDBNull(3) ? "Не указан" : reader.GetString(3);
 
-                                allChildren.Add(new ChildrenContext(id, name, price, age, idShop));
+                                allSport.Add(new SportContext(id, name, price, size));
                             }
                             catch (Exception ex)
                             {
@@ -57,10 +56,10 @@ namespace Shop_Kazakov.Classes
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка загрузки детских товаров: {ex.Message}");
+                Console.WriteLine($"Ошибка загрузки спортивных товаров: {ex.Message}");
             }
 
-            return allChildren;
+            return allSport;
         }
 
         public void Delete() => throw new NotImplementedException();

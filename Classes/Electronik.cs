@@ -10,7 +10,7 @@ namespace Shop_Kazakov.Models
     {
         public int BatteryCapacity { get; set; }
         public int MaxSpeed { get; set; }
-        public Electronik(string Name, int Price, int BatteryCapacity, int MaxSpeed) : base(Name, Price)
+        public Electronik(int Id, string Name, int Price, int BatteryCapacity, int MaxSpeed) : base(Id, Name, Price)
         {
             this.BatteryCapacity = BatteryCapacity;
             this.MaxSpeed = MaxSpeed;

@@ -10,7 +10,7 @@ namespace Shop_Kazakov.Models
     {
         public string Size { get; set; }
 
-        public Sport(string Name, int Price, string Size) : base(Name, Price) {
+        public Sport(int Id, string Name, int Price, string Size) : base(Id, Name, Price) {
             this.Size = Size;
         }
     }

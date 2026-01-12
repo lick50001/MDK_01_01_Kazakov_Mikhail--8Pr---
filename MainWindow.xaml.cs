@@ -1,51 +1,100 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Shop_Kazakov.Classes;
 
 namespace Shop_Kazakov
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        List<object> AllItems = Models.ShopContext.AllItems();
+        private List<object> allChildrenItems;
+        private List<object> allSportItems;
+        private List<object> allElectronikItems;
+        private List<object> allItems;
 
         public MainWindow()
         {
             InitializeComponent();
 
+
+            LoadAllData();
             CreateUI();
         }
 
+        private void LoadAllData()
+        {
+            try
+            {
+                allChildrenItems = ChildrenContext.GetAllItems();
+                allSportItems = SportContext.GetAllItems();
+                allElectronikItems = ElectronikContext.GetAllItems();
+
+                allItems = new List<object>();
+                allItems.AddRange(allChildrenItems);
+                allItems.AddRange(allSportItems);
+                allItems.AddRange(allElectronikItems);
+
+                System.Diagnostics.Debug.WriteLine($"Загружено: Детские - {allChildrenItems.Count}, Спорт - {allSportItems.Count}, Электроника - {allElectronikItems.Count}, Всего - {allItems.Count}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
         public void CreateUI()
         {
-            foreach (var item in AllItems)
-                parent.Children.Add(new Elements.Item(item));
+            parent.Children.Clear();
+
+            if (allItems == null || allItems.Count == 0)
+            {
+                LoadAllData();
+            }
+
+            foreach (var item in allItems)
+            {
+                try
+                {
+                    parent.Children.Add(new Elements.Item(item));
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Ошибка создания элемента: {ex.Message}");
+                }
+            }
         }
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            string ItemSearch = SerchTextBox.Text.Trim();
+            string searchText = SerchTextBox.Text.Trim();
             parent.Children.Clear();
-            foreach (var item in AllItems)
-            {
-                var shopItem = item as Models.Shop;
-                if (shopItem.Name.IndexOf(ItemSearch, StringComparison.OrdinalIgnoreCase) >= 0)
-                    parent.Children.Add(new Elements.Item(item));
-            }
 
+            if (string.IsNullOrEmpty(searchText))
+            {
+                foreach (var item in allItems)
+                {
+                    parent.Children.Add(new Elements.Item(item));
+                }
+            }
+            else
+            {
+                foreach (var item in allItems)
+                {
+                    var shopItem = item as Models.Shop;
+                    if (shopItem != null &&
+                        shopItem.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        parent.Children.Add(new Elements.Item(item));
+                    }
+                }
+            }
+        }
+
+        public void RefreshData()
+        {
+            LoadAllData();
+            CreateUI();
         }
     }
 }
