@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Models\Children.cs" />
     <Compile Include="Classes\Electronik.cs" />
     <Compile Include="Classes\RepoItems.cs" />
@@ -109,5 +110,6 @@
   <ItemGroup>
     <Resource Include="Images\ic_item.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
