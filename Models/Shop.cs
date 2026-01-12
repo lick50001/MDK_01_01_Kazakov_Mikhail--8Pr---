@@ -8,10 +8,15 @@ namespace Shop_Kazakov.Models
 {
     public class Shop
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
-        public Shop(string Name, int Price)
+
+        public Shop() { }
+
+        public Shop(int Id, string Name, int Price)
         {
+            this.Id = Id;
             this.Name = Name;
             this.Price = Price;
         }

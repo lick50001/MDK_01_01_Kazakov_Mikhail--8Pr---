@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop_Kazakov.Interfaces;
 
 namespace Shop_Kazakov.Models
 {
-    public class RepoItems
+    public class ShopContext: Shop, IContext
     {
+        public ShopContext(int Id, string Name, int Price) : base(Id, Name, Price) { }
         public static List<object> AllItems()
         {
             List<object> allItems = new List<object>();
@@ -22,6 +24,16 @@ namespace Shop_Kazakov.Models
             allItems.Add(new Electronik("Гироскутер", 73950, 4500, 40));
 
             return allItems;
+        }
+
+        public void Delete()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Save(bool Update = false)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Shop_Kazakov
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<object> AllItems = Models.RepoItems.AllItems();
+        List<object> AllItems = Models.ShopContext.AllItems();
 
         public MainWindow()
         {
